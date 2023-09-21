@@ -1,4 +1,4 @@
-bin
-include
-lib
-python-version
+bin/
+include/
+lib/
+.python-version
