@@ -50,23 +50,28 @@ def store_feedback():
     # Ensure that 'text' is not empty or None
     if text:
         # Determine the target value based on 'prediction_correct'
-        # If 'prediction_correct' is 'yes', set target to 1 (not negative)
-        # If 'prediction_correct' is not 'yes', set target to 0 (negative)
-        target = 1 if prediction_correct == 'yes' else 0
+        # If 'prediction_correct' is 'yes' and the prediction was not negative, set target to 1
+        # If 'prediction_correct' is 'yes' and the prediction was negative, set target to 0
+        # If 'prediction_correct' is not 'yes', do nothing
+        predicted_class = sentiment_analyzer.perform_sentiment_analysis(text)
+        if prediction_correct == 'yes':
+            if predicted_class == 'Not Negative':
+                target = 1
+            else:
+                target = 0
+        else:
+            return redirect(url_for('index'))
 
         try:
             # Insert the user feedback into the database
             insert_query = "INSERT INTO input_data (text, target) VALUES (%s, %s)"
             cursor.execute(insert_query, (text, target))
-
-            # Commit the transaction
             db.commit()
 
             # Debug message to indicate success
             print("Feedback stored successfully.")
 
         except mysql.connector.Error as err:
-            # Handle any database-related errors
             print(f"Database error: {err}")
             db.rollback()  # Rollback the transaction on error
 
@@ -74,6 +79,7 @@ def store_feedback():
         print("no text")
 
     return redirect(url_for('index'))
+
 
 
 
