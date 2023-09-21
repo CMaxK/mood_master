@@ -9,8 +9,8 @@ class BertClassifier(nn.Module):
     """
     def __init__(self, freeze_bert=False):
         super(BertClassifier, self).__init__()
-        # Specify hidden size of BERT, hidden size of our classifier, and number of labels
-        D_in, H, D_out = 768, 50, 2  # Adjust these values as needed
+        # Specify hidden size of BERT, hidden size of classifier, and number of labels
+        D_in, H, D_out = 768, 50, 2
 
         # Instantiate BERT model
         self.bert = BertModel.from_pretrained('bert-base-uncased')
