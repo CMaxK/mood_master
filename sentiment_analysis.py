@@ -2,7 +2,6 @@ import re
 import torch
 from transformers import BertTokenizer, BertModel
 import torch.nn as nn
-from torch.nn.functional import softmax
 
 class BertClassifier(nn.Module):
     """Bert Model for Classification Tasks.
@@ -58,6 +57,7 @@ class SentimentAnalysis:
         text = re.sub(r'\s+', ' ', text).strip()
 
         return text
+
 
     def perform_sentiment_analysis(self, text):
         preprocessed_text = self.text_preprocessing(text)

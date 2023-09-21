@@ -8,8 +8,21 @@
 </head>
 <body>
   <div class="container">
-      <h1>Sentiment Analysis Result</h1>
-      <p>Your message is: <span id="sentiment" class="{{ sentiment_class }}">{{ sentiment }}</span></p>
+      <form method="POST" action="/feedback">
+        <h1>Analysis Result</h1>
+        <label for="text-output">Predicted Sentiment:</label>
+        <div id="sentiment" class="{{ sentiment_class }}">{{ sentiment }}</div>
+
+        <!-- Add the input for user feedback -->
+        <label for="prediction-correct">Was the prediction correct?</label>
+        <input type="radio" id="prediction-correct" name="prediction_correct" value="yes"> Yes
+        <input type="radio" id="prediction-correct" name="prediction_correct" value="no"> No
+
+        <!-- Add a hidden input field to store the user's original text -->
+        <input type="hidden" name="original_text" value="{{ original_text }}">
+
+        <input type="submit" value="Submit Feedback">
+    </form>
   </div>
 </body>
 </html>
