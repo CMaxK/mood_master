@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="static/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Sentiment Analysis</h1>
+      <form method="POST" action="/predict">
+          <label for="text-input">Enter text:</label>
+          <input type="text" id="text-input" name="text" maxlength="70" required>
+          <div id="char-count">0 / 70</div>
+          <input type="submit" value="Submit">
+      </form>
+  </div>
+
+  <script>
+      const textInput = document.getElementById("text-input");
+      const charCount = document.getElementById("char-count");
+
+      textInput.addEventListener("input", function () {
+          const currentLength = textInput.value.length;
+          charCount.textContent = `${currentLength} / 70`;
+
+          if (currentLength > 70) {
+              textInput.value = textInput.value.slice(0, 70);
+              charCount.textContent = "70 / 70";
+          }
+      });
+  </script>
+</body>
+</html>

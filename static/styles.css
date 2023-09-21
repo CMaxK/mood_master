@@ -1,0 +1,93 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  text-align: center;
+  margin: 0;
+}
+
+.container {
+  background-color: #fff;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+  min-height: 70px; /* Set a minimum height */
+  border: 1px solid #ccc; /* Add a solid border */
+  white-space: pre-wrap; /* Allow text to wrap to new lines */
+  word-wrap: break-word; /* Ensure long words are wrapped */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  resize: vertical; /* Allow vertical resizing */
+}
+
+
+input[type="submit"] {
+  display: block;
+  margin: 10px auto; /* Center horizontally with top and bottom margin */
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+a {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #007BFF;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Style for a "green" sentiment */
+#sentiment.green {
+  color: white;
+  background-color: green;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Style for a "red" sentiment */
+#sentiment.red {
+  color: white;
+  background-color: red;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Center the result text */
+#sentiment {
+  display: inline-block;
+  text-align: center;
+  margin-top: 20px; /* Adjust the margin-top value to control vertical centering */
+}
