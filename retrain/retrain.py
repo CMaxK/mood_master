@@ -1,6 +1,5 @@
 import torch
 import torch.nn as nn
-import pandas as pd
 from sklearn.model_selection import train_test_split
 from sentiment_analysis import BertClassifier
 from transformers import BertTokenizer, AdamW

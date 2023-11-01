@@ -5,3 +5,4 @@ lib/
 .env
 django_sentiment_app/
 data/
+
