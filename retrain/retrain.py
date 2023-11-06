@@ -4,7 +4,9 @@ from sklearn.model_selection import train_test_split
 from sentiment_analysis import BertClassifier
 from transformers import BertTokenizer, AdamW
 from helpers.db import load_from_db
+from log import setup_logger
 
+log = setup_logger()
 MODEL_PATH = 'model_weights/bert_model_weights.pth'
 DB_DATA = load_from_db()
 BATCH_SIZE = 32
@@ -47,7 +49,7 @@ for epoch in range(EPOCHS):
         loss.backward()
         optimizer.step()
         total_loss += loss.item()
-    print(f"Epoch {epoch+1}/{EPOCHS}, Loss: {total_loss/len(train_loader)}")
+    log.info(f"Epoch {epoch+1}/{EPOCHS}, Loss: {total_loss/len(train_loader)}")
 
 # Evaluate new model
 model.eval()
@@ -60,7 +62,7 @@ with torch.no_grad():
         correct += (predictions == labels).sum().item()
 
 new_accuracy = correct / len(test_texts)
-print(f"New Model Accuracy: {new_accuracy*100:.2f}%")
+log.info(f"New Model Accuracy: {new_accuracy*100:.2f}%")
 
 # Load old model and evaluate
 old_model = BertClassifier().to(DEVICE)
@@ -81,6 +83,6 @@ print(f"Old Model Accuracy: {old_accuracy*100:.2f}%")
 # Compare and overwrite if new model is better
 if new_accuracy > old_accuracy:
     torch.save(model.state_dict(), MODEL_PATH)
-    print("New model is better. Overwriting old model weights.")
+    log.info("New model is better. Overwriting old model weights.")
 else:
-    print("Old model is better. Keeping old model weights.")
+    log.info("Old model is better. Keeping old model weights.")

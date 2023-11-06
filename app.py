@@ -3,8 +3,9 @@ from sentiment_analysis import SentimentAnalysis
 from datetime import datetime
 from helpers.db import get_db_connection
 import mysql.connector
+from log import setup_logger
 
-
+log = setup_logger()
 app = Flask(__name__)
 db = get_db_connection()
 cursor = db.cursor()
@@ -31,8 +32,8 @@ def store_feedback():
     current_datetime = datetime.now()
     formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S.%f")
 
-    print(f"Received text: {text}")
-    print(f"Prediction correctness: {prediction_correct}")
+    log.info(f"Received text: {text}")
+    log.info(f"Prediction correctness: {prediction_correct}")
 
     if text:
         # If 'prediction_correct' is 'yes' and the prediction was not negative, set target to 1
@@ -53,14 +54,14 @@ def store_feedback():
             cursor.execute(insert_query, (text, target, formatted_datetime))
             db.commit()
 
-            print("Feedback stored successfully.")
+            log.info("Feedback stored successfully.")
 
         except mysql.connector.Error as err:
-            print(f"Database error: {err}")
+            log.info(f"Database error: {err}")
             db.rollback()  # Rollback the transaction on error
 
     else:
-        print("no text")
+        log.info("no text")
 
     return redirect(url_for('thanks'))
 
@@ -70,3 +71,4 @@ def thanks():
 
 if __name__ == '__main__':
     app.run(debug=True)
+    log.info('Starting the application')
