@@ -12,14 +12,18 @@ The task is ultimately a binary classification with reviews being either negativ
 'negative' or 'not-negative' categories.
 
 Checkout the notebooks for the model tuning and comparison code. It includes lots of comments to follow my thought process.
+
 ---
+
 ## To run:
 1. Git clone this repo
 2. re-run bert-training.ipynb to obtain model weights and save in a model_weights directory.
 3. Create a **.env** file with MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE, MYSQL_TABLE variables to store your specific DB credentials
 4. run `docker-compose build && docker-compose up`
 5. the app is hosted on port 5001 (enter **http://localhost:5001** into your browser)
+   
 ---
+
 ## Homepage of App:
 ![image](https://github.com/CMaxK/sentiment_app/assets/71667581/00298c25-3d55-452c-8a16-05f607c920ad)
 
