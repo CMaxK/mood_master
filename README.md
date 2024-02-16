@@ -11,7 +11,7 @@ Using airline review data, I compared the performance of a Naive Bayes Classifie
 The task is ultimately a binary classification with reviews being either negative or not-negative. The aim is to accurately classify any input text into either
 'negative' or 'not-negative' categories.
 
-Checkout the notebooks ([notebooks](https://github.com/CMaxK/sentiment_app/tree/master/notebooks)) for the model training and comparison process. It includes lots of comments to follow my thought process.
+Checkout the [notebooks](https://github.com/CMaxK/sentiment_app/tree/master/notebooks) for the model training and comparison process. It includes lots of comments to follow my thought process.
 
 ---
 
