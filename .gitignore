@@ -5,4 +5,4 @@ lib/
 .env
 django_sentiment_app/
 data/
-
+model_weights/

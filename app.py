@@ -4,11 +4,14 @@ from datetime import datetime
 from helpers.db import get_db_connection
 import mysql.connector
 from log import setup_logger
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 log = setup_logger()
+database_name = os.getenv("MYSQL_DATABASE")
+table_name = os.getenv("MYSQL_TABLE")
 app = Flask(__name__)
-db = get_db_connection()
-cursor = db.cursor()
 
 # Create an instance of the SentimentAnalysis class with the model weights path
 sentiment_analyzer = SentimentAnalysis('model_weights/bert_model_weights.pth')
@@ -32,6 +35,7 @@ def store_feedback():
     current_datetime = datetime.now()
     formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S.%f")
 
+    log.info("***NEW RECORD RECEIVED***")
     log.info(f"Received text: {text}")
     log.info(f"Prediction correctness: {prediction_correct}")
 
@@ -48,17 +52,24 @@ def store_feedback():
         else:
             return redirect(url_for('index'))
 
+        db = get_db_connection()
+        cursor = db.cursor()
+
         try:
+            cursor.execute(f"USE {database_name}")
             # Insert the user feedback into the database
-            insert_query = "INSERT INTO input_data (text, target, created_at) VALUES (%s, %s, %s)"
+            insert_query = f"INSERT INTO {table_name} (text, target, created_at) VALUES (%s, %s, %s)"
             cursor.execute(insert_query, (text, target, formatted_datetime))
             db.commit()
-
             log.info("Feedback stored successfully.")
 
         except mysql.connector.Error as err:
             log.info(f"Database error: {err}")
             db.rollback()  # Rollback the transaction on error
+
+        finally:
+            cursor.close()
+            db.close()
 
     else:
         log.info("no text")

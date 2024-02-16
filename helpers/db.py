@@ -1,12 +1,11 @@
 import os
 import mysql.connector
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
 from pandas import read_sql_query
 from log import setup_logger
 
 log = setup_logger()
-env_path = find_dotenv()
-load_dotenv(env_path)
+load_dotenv()
 
 def get_db_connection():
     try:
@@ -30,3 +29,17 @@ def load_from_db():
     """
     result = read_sql_query(query, con=db)
     return result
+
+if __name__ == "__main__":
+    try:
+        # Attempt to establish a database connection
+        db_connection = get_db_connection()
+
+        # If the connection was successful, print a success message
+        if db_connection:
+            print("Database connection established successfully!")
+            # Perform additional operations if needed
+        else:
+            print("Failed to establish a database connection.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
