@@ -2,7 +2,7 @@
 
 ## Features:
 * Fine-tuned BERT model weights exported in a lightweight Flask API within Docker container ready for inference.
-* Front-end app to accept text input. This input is sent to the model for classification.
+* Front-end app to accept text input from user. This input is sent to the model for classification.
 * Backend MYSQL DB (separate Docker container) to store correctly classified texts with option to further fine-tune the BERT model with new data.
 * Complete logging infrastructure to track inputs and performance of APP
 * Incorrect predictions are not stored in DB as it would negatively imapct model performance
